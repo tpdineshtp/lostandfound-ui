@@ -1,2 +1,3 @@
-export const ADD_ATTEMPT = 'add', ADDED_FAILED = 'add_fail', ADDED_SUCCESSFULLY = 'add_success',
-            GET_FAILED = 'get_failed', GET_SUCCESSFULLY = 'get_success', GET_ATTEMPT = 'get_attempt';
+export const SUCCESS = 'success',
+             ADD_BOOKMARK = 'add_bookmark',
+             GET_ALL_BOOKMARKS = 'get_all_bookmarks'

@@ -1,7 +1,7 @@
-import * as AddActions from '../actions/bookmark';
+import { successResponse } from '../actions/bookmark';
 
-const AddApiCall = {
- login(userData) {
+const CreateApiCall = {
+ newBookmark(userData) {
    fetch('http://localhost:3000/bookmarks', {
      method: 'post',
      headers: {
@@ -16,12 +16,13 @@ const AddApiCall = {
    })
    .then(response => {
      if (response.status >= 200 && response.status < 300) {
-       console.log(response);
-       AddActions.addSuccess(response);
+       response.json().then(data => {
+         console.log(data)
+         successResponse(data);
+       });
      } else {
        const error = new Error(response.statusText);
        error.response = response;
-       AddActions.addError();
        throw error;
      }
    })
@@ -29,4 +30,4 @@ const AddApiCall = {
  },
 };
 
-export default AddApiCall;
+export default CreateApiCall;

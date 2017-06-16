@@ -10,28 +10,43 @@ class Bookmark extends Component {
     super(props)
     this.onTapped = this.onTapped.bind(this);
     this.get_bookmarks = this.get_bookmarks.bind(this);
+    this.renderBookmarks = this.renderBookmarks.bind(this);
     this.get_bookmarks()
   }
 
   onTapped() {
-    console.log(this.props.action)
-    this.props.action.addRequest("Facebook", "www.fb.com", ["good, entertainment"])
+    this.props.action.addBookmark("Facebook", "www.fb.com", ["good", "entertainment"])
   }
 
 
   get_bookmarks() {
-    this.props.action.getRequest();
+    this.props.action.getAllBookmarks();
   }
+
   searchUpdated (term) {
     console.log(term)
   }
+
+  renderBookmarks() {
+    console.log(this.props.bookmark)
+    return this.props.bookmark.map( (mark, idx) => {
+      console.log(idx)
+      return (
+        <li key={idx}> {mark.name}  {mark.url} </li>
+      )
+    });
+  }
+
   render() {
+    console.log(this.props)
     return (
       <div>
         <button onClick={this.onTapped}>Add</button>
         <SearchInput className="search-input" onChange={this.searchUpdated} />
+        <ul>
+          {this.renderBookmarks()}
+        </ul>
         <div>
-          {console.log(this.props.bookmark)}
           <Grid />
         </div>
       </div>
@@ -39,8 +54,8 @@ class Bookmark extends Component {
   }
 }
 
-function mapStateToProps(state,props){
-  return {props: state.bookmark};
+function mapStateToProps(state){
+  return {bookmark: state.bookmark};
 }
 
 function mapDispatchToProps(dispatch){
