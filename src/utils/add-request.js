@@ -1,4 +1,4 @@
-import * as AddActions from '../actions/add_bookmark';
+import * as AddActions from '../actions/bookmark';
 
 const AddApiCall = {
  login(userData) {
