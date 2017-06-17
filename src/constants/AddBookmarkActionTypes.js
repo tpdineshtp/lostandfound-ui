@@ -1,3 +1,11 @@
 export const SUCCESS = 'success',
              ADD_BOOKMARK = 'add_bookmark',
-             GET_ALL_BOOKMARKS = 'get_all_bookmarks'
+             GET_ALL_BOOKMARKS = 'get_all_bookmarks',
+             DELETE_BOOKMARK  = 'delete_bookmark',
+             DELETE_SUCCESS = 'deleted_success',
+             UPDATE_BOOKMARK = 'update_bookamrk',
+             UPDATE_SUCCESS = 'update_success',
+             FLIP_EDITABLE = 'flip_editable',
+             ADD_SUCCESS = 'add_succes',
+             FILTER_BOOKMARK = 'filter_bookmark',
+             FILTER_SUCCESS = 'filter_success'

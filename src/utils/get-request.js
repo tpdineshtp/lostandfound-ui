@@ -3,7 +3,6 @@ import store from '../store'
 
 const ReadApiCall = {
  getBookmarks() {
-   console.log("Get Bookmarks")
    makeApiCall('http://localhost:3000/bookmarks')
  },
 

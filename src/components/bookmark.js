@@ -11,11 +11,12 @@ class Bookmark extends Component {
     this.onTapped = this.onTapped.bind(this);
     this.get_bookmarks = this.get_bookmarks.bind(this);
     this.renderBookmarks = this.renderBookmarks.bind(this);
+    this.searchUpdated = this.searchUpdated.bind(this);
     this.get_bookmarks()
   }
 
   onTapped() {
-    this.props.action.addBookmark("Facebook", "www.fb.com", ["good", "entertainment"])
+    this.props.action.addBookmark("Default Name", "www.example.com", ["web", "entertainment"])
   }
 
 
@@ -24,31 +25,37 @@ class Bookmark extends Component {
   }
 
   searchUpdated (term) {
-    console.log(term)
+    if(term === null || term.match(/^ *$/) !== null){
+      term = 'a'
+    }
+    this.props.action.filterBookmark(term);
   }
 
   renderBookmarks() {
-    console.log(this.props.bookmark)
     return this.props.bookmark.map( (mark, idx) => {
-      console.log(idx)
       return (
-        <li key={idx}> {mark.name}  {mark.url} </li>
+        <div key={idx}>
+          <Grid
+            id={mark._id}
+            name={mark.name}
+            url={mark.url}
+            tags={mark.tags}
+            action={this.props.action}
+            editable={mark.editable}
+          />
+        </div>
       )
     });
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
-        <button onClick={this.onTapped}>Add</button>
-        <SearchInput className="search-input" onChange={this.searchUpdated} />
+        <button onClick={this.onTapped}>Add New</button>
+        <SearchInput className="search-input" onChange={ this.searchUpdated } />
         <ul>
           {this.renderBookmarks()}
         </ul>
-        <div>
-          <Grid />
-        </div>
       </div>
     );
   }
