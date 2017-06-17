@@ -3,7 +3,7 @@ import store from '../store'
 
 const FilterApiCall = {
  filterBookmark(search) {
-   fetch('http://localhost:3000/bookmarks/tags'+ search, {
+   fetch('http://localhost:3000/bookmarks/tags/'+ search, {
      method: 'get',
    })
    .then(response => {
