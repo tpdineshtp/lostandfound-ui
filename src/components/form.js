@@ -11,14 +11,30 @@ class Form extends Component {
     var url = document.getElementById(bookmark+'url').value
     var tags = document.getElementById(bookmark+'tags').value
     var request = this.request_body(name,url,tags);
-    if(this.props.newbookmark === true) {
-      console.log(name)
-      request.userId = this.props.user._id;
-      this.props.action.addBookmark(request, this.props.user._id)
-      this.props.useraction.removeNewBookmark();
+
+    if(!name.trim()){
+      alert("Please enter a valid Name");
     }
-    else {
-      this.props.action.updateBookmark( request, bookmark )
+    else{
+      if(!url.trim()){
+        alert("Please enter a valid URL")
+      }
+      else{
+        tags = tags.replace( /\n/g, " " ).split(/[ ,]+/).filter(Boolean)
+        if(tags.length === 0){
+          alert("Please enter valid tags");
+        }
+        else{
+          if(this.props.newbookmark === true) {
+            request.userId = this.props.user._id;
+            this.props.action.addBookmark(request, this.props.user._id)
+            this.props.useraction.removeNewBookmark();
+          }
+          else {
+            this.props.action.updateBookmark( request, bookmark )
+          }
+        }
+      }
     }
   }
 
@@ -26,7 +42,7 @@ class Form extends Component {
     return {
       name: name,
       url: url,
-      tags: tags.replace( /\n/g, " " ).split(/[ ,]+/).filter(Boolean)
+      tags: tags
     }
   }
   flip(bookmark){
@@ -41,76 +57,32 @@ class Form extends Component {
   render() {
     var { id, name, tags, url, editable } = this.props
     return (
-      <div hidden={!editable} id="edit" >
-        <table cellSpacing="1" >
-          <tbody>
-          <tr>
-            <td >
-              Name:
-            </td>
-            <td>
-              &nbsp;&nbsp;&nbsp;
-            </td>
-            <td>
-              <input id={id+"name"} name="title"  type="text" defaultValue={name} size="50"  />
-              <br />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <br />
-            </td>
-          </tr>
-          <tr>
-            <td >
-              URL:
-            </td>
-            <td>
-              &nbsp;&nbsp;&nbsp;
-            </td>
-            <td>
-              <input id={id+"url"} name="labels" type="text" defaultValue={url} size="50"  />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <br/>
-            </td>
-          </tr>
-          <tr>
-            <td >
-              Tags:
-            </td>
-            <td>
-              &nbsp;&nbsp;&nbsp;
-            </td>
-            <td>
-              <textarea id={id+"tags"} rows="4" defaultValue={tags}>
-              </textarea>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <br />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="3">
-              <table>
-                <tbody>
-                  <tr>
-                    <td>
-                      <input type="button" value="Cancel" onClick={ () => this.flip(id)} />
-                      &nbsp;&nbsp;&nbsp;
-                      <input className="submit" type="submit" value="Save" onClick={ () => this.updateBookmark(id)}/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div hidden={!editable} id="edit" className="col-sm-8" >
+      <div data-toggle="validator" role="form">
+        <div className="form-group">
+          <label className="control-label">Name</label>
+          <input type="text" className="form-control" id={id+"name"} placeholder="Google" defaultValue={name} required />
+        </div>
+        <div className="form-group has-feedback">
+          <label className="control-label">URL</label>
+          <div className="input-group">
+            <span className="input-group-addon">@</span>
+            <input type="text" className="form-control" id={id+"url"} placeholder="www.google.com" defaultValue={url} required />
+          </div>
+          <span className="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div className="form-group">
+          <label className="control-label">Tags</label>
+            <textarea id={id+"tags"} rows="4" placeholder="web entertainment" defaultValue={tags}>
+            </textarea>
+          <span className="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div className="form-group">
+          <button onClick={ () => this.flip(id)} className="btn btn-primary">Cancel</button>
+          &nbsp;&nbsp;&nbsp;
+          <button onClick={  () => this.updateBookmark(id)} className="btn btn-primary">Submit</button>
+        </div>
+      </div>
     </div>
     );
   }
