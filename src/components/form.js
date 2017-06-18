@@ -14,6 +14,7 @@ class Form extends Component {
     if(this.props.newbookmark === true) {
       console.log(name)
       this.props.action.addBookmark(request)
+      this.props.useraction.removeNewBookmark();
     }
     else {
       this.props.action.updateBookmark( request, bookmark )
@@ -28,9 +29,13 @@ class Form extends Component {
     }
   }
   flip(bookmark){
-    this.props.action.makeEditable(bookmark)
+    if(this.props.newbookmark === true) {
+      this.props.useraction.removeNewBookmark();
+    }
+    else{
+      this.props.action.makeEditable(bookmark)
+    }
   }
-
 
   render() {
     var { id, name, tags, url, editable } = this.props

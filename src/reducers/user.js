@@ -1,4 +1,4 @@
-import { ADD_USER } from '../constants';
+import { ADD_USER, ADD_USER_SUCCESS, ADD_NEW_BOOKMARK, AUTH_USER, AUTH_USER_SUCCESS, REMOVE_NEW_BOOKMARK } from '../constants';
 
 import update from 'react-addons-update';
 import CreateApiCall from '../utils/add-request';
@@ -10,12 +10,27 @@ import FilterApiCall from '../utils/filter-request'
 export default function(state = [], action) {
   switch (action.type) {
     case ADD_USER:
-      CreateApiCall.newBookmark(action.payload);
+      CreateApiCall.newUser(action.payload);
+      // this.props.action.getAllBookmarks(action.payload._id);
       return state;
-    // case ADD_USER_SUCCESS:
-    //   action.payload.map((bookmark) => {
-    //     bookmark.editable = false;
-    //   })
+    case ADD_USER_SUCCESS:
+      action.payload.new_bookmark = false;
+      return action.payload;
+    case ADD_NEW_BOOKMARK:
+      var newState = {...state}
+      newState.new_bookmark = true;
+      return newState;
+    case REMOVE_NEW_BOOKMARK:
+      var newState = {...state}
+      newState.new_bookmark = false;
+      return newState;
+    case AUTH_USER:
+      CreateApiCall.authUser(action.payload);
+      return state;
+    case AUTH_USER_SUCCESS:
+      action.payload.new_bookmark = false;
+      // this.props.action.getAllBookmarks(action.payload._id);
+      return action.payload;
     //   return action.payload
     // case ADD_SUCCESS:
     //   console.log("New Bookmark Added")

@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as bookmark from '../actions/bookmark';
+import * as user from '../actions/user'
 import SearchInput from 'react-search-input'
 import Grid from './grid';
 import Form from './form'
+import UserForm from './userform'
 import { ListView, ListViewItem } from 'react-scrollable-list-view';
 
 class Bookmark extends Component {
@@ -18,7 +20,8 @@ class Bookmark extends Component {
   }
 
   onTapped() {
-    this.props.action.addBookmark({"name": "Default Name","url" :"www.example.com","tags": ["web", "entertainment"]})
+    // this.props.action.addBookmark({"name": "Default Name","url" :"www.example.com","tags": ["web", "entertainment"]})
+    this.props.useraction.addNewBookmark();
   }
 
 
@@ -53,29 +56,47 @@ class Bookmark extends Component {
   render() {
     return (
       <div>
-        <SearchInput className="search-input" onChange={ this.searchUpdated } />
-        <button onClick={this.onTapped}>Add New</button>
-        <ul>
-            <Form
-              {...this.props}
-              editable={true}
-              newbookmark={true}
-              id="new"
-             />
-          {this.renderBookmarks()}
-        </ul>
+        <div hidden={this.props.user._id}>
+          Login :
+          <UserForm
+            {...this.props}
+            register={false}
+          />
+
+          Register :
+          <UserForm
+            {...this.props}
+            register={true}
+          />
+        </div>
+        <div hidden={!this.props.user._id}>
+          <SearchInput className="search-input" onChange={ this.searchUpdated } />
+          <button onClick={this.onTapped}>Add New</button>
+          <ul>
+            <div hidden={!this.props.user.new_bookmark} >
+              <Form
+                {...this.props}
+                editable={true}
+                newbookmark={true}
+                id="new"
+               />
+              </div>
+            {this.renderBookmarks()}
+          </ul>
+        </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state){
-  return {bookmark: state.bookmark};
+  return {bookmark: state.bookmark, user: state.user};
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    action: bindActionCreators(bookmark,dispatch)
+    action: bindActionCreators(bookmark,dispatch),
+    useraction: bindActionCreators(user, dispatch)
   }
 }
 
