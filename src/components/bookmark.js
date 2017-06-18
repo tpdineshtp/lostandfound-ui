@@ -58,7 +58,7 @@ class Bookmark extends Component {
             </form>
         </div>
         <ul className="nav navbar-nav navbar-right">
-          <li><a href="javascript:void(0);" onClick={this.onNewTapped}>Add New</a></li>
+          <li><a href="javascript:void(0);" onClick={this.onNewTapped}>Add Bookmark</a></li>
           <li className="dropdown">
             <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown">{this.props.user.username} <b className="caret"></b></a>
             <ul className="dropdown-menu">
@@ -72,6 +72,8 @@ class Bookmark extends Component {
   }
 
   renderBookmarks() {
+    if(this.props.bookmark.length === 0)
+      return ( <div className="center"> Nothing found yet! <br/> Add your bookmarks </div> )
     return this.props.bookmark.map( (mark, idx) => {
       return (
         <div key={idx}>

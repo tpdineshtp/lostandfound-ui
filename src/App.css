@@ -40,6 +40,13 @@ body {
 	width:50%;
 }
 
+.center {
+  text-align: center;
+  font-family: cursive;
+  font-size: x-large;
+  font-weight: 900;
+  padding-top: 5rem;
+}
 .nav-tabs {
     border-bottom: none !important;
 }
