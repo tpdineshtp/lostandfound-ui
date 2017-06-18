@@ -6,6 +6,7 @@ class Form extends Component {
     this.updateBookmark = this.updateBookmark.bind(this)
     this.flip = this.flip.bind(this)
   }
+
   updateBookmark( bookmark ) {
     var name = document.getElementById(bookmark+'name').value
     var url = document.getElementById(bookmark+'url').value
@@ -48,6 +49,7 @@ class Form extends Component {
       tags: tags
     }
   }
+
   flip(bookmark){
     if(this.props.newbookmark === true) {
       document.getElementById('newtags').value = "";

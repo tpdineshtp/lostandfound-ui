@@ -1,5 +1,5 @@
 import { updateSuccess } from '../actions/bookmark';
-import store from '../store'
+import responseHandler from './responseHandler'
 
 const UpdateApiCall = {
  upadateBookmark(bookmark, id) {
@@ -11,19 +11,7 @@ const UpdateApiCall = {
      },
      body: JSON.stringify(bookmark),
    })
-   .then(response => {
-     if (response.status >= 200 && response.status < 300) {
-       response.json().then(data => {
-         if(!data.errors){
-          store.dispatch(updateSuccess(data));
-        }
-       });
-     } else {
-       const error = new Error(response.statusText);
-       error.response = response;
-       throw error;
-     }
-   })
+   .then(response => responseHandler(response, updateSuccess))
    .catch(error => { console.log('request failed', error); });
  },
 };

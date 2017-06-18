@@ -6,7 +6,6 @@ class Grid extends Component {
     this.flip = this.flip.bind(this);
   }
 
-
   deleteBookmark( bookmark ) {
     this.props.action.deleteBookmark(bookmark);
   }
@@ -44,11 +43,9 @@ class Grid extends Component {
             </div>
           </span>
         </div>
-
         <Form
           {...this.props}
         />
-
     </div>
     );
   }

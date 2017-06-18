@@ -1,7 +1,6 @@
 .App {
   text-align: center;
 }
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -48,6 +47,12 @@ body {
 .submit{
   text-align: center;
 }
+
+/*
+All the below found CSS are being added
+as part of bootstrap's UI styling.
+TODO: Divide into multiple css files
+*/
 .nav-tabs>li{
 	color:#222 !important;
 }
@@ -169,10 +174,6 @@ body {
 	color: inherit;
 	font-weight: bold;
 }
-
-/*	--------------------------------------------------
-	:: Table Filter
-	-------------------------------------------------- */
 .panel {
 	border: 1px solid #ddd;
 	background-color: #fcfcfc;

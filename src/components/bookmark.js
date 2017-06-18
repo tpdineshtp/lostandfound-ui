@@ -7,7 +7,6 @@ import SearchInput from 'react-search-input'
 import Grid from './grid';
 import Form from './form'
 import UserForm from './userform'
-import { ListView, ListViewItem } from 'react-scrollable-list-view';
 
 class Bookmark extends Component {
   constructor(props) {
@@ -15,6 +14,7 @@ class Bookmark extends Component {
     this.onNewTapped = this.onNewTapped.bind(this);
     this.renderBookmarks = this.renderBookmarks.bind(this);
     this.searchUpdated = this.searchUpdated.bind(this);
+    this.renderTopNavgation= this.renderTopNavgation.bind(this);
     this.logOut = this.logOut.bind(this)
   }
 
@@ -25,10 +25,50 @@ class Bookmark extends Component {
     this.props.useraction.logOut();
   }
   searchUpdated (term) {
+    /*
+    TODO- To avoid sending empty string as params,
+            empty search is considered as *
+    */
     if(term === null || term.match(/^ *$/) !== null){
       term = '*'
     }
     this.props.action.filterBookmark(term, this.props.user._id);
+  }
+
+  renderTopNavgation(){
+    return (
+    <nav className="navbar navbar-default">
+      <div className="navbar-header">
+        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span className="sr-only">Toggle navigation</span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+        </button>
+        <a className="navbar-brand" href="javascript:void(0);">Bookmark Manager</a>
+      </div>
+
+      <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <div className="col-sm-6 col-md-6">
+            <form role="search">
+            <div className="input-group full-width">
+              <SearchInput className="search-input" onChange={ this.searchUpdated } />
+            </div>
+            </form>
+        </div>
+        <ul className="nav navbar-nav navbar-right">
+          <li><a href="javascript:void(0);" onClick={this.onNewTapped}>Add New</a></li>
+          <li className="dropdown">
+            <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown">{this.props.user.username} <b className="caret"></b></a>
+            <ul className="dropdown-menu">
+              <li><a href="javascript:void(0);" onClick={this.logOut}>Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    )
   }
 
   renderBookmarks() {
@@ -55,54 +95,26 @@ class Bookmark extends Component {
           <UserForm  {...this.props}/>
         </div>
         <div hidden={!this.props.user._id}>
-
-        <nav className="navbar navbar-default" role="navigation">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">Bookmark Manager</a>
+          {this.renderTopNavgation()}
+          <div hidden={!this.props.user.new_bookmark} >
+            <Form
+              {...this.props}
+              editable={true}
+              newbookmark={true}
+              id="new"
+             />
           </div>
-
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <div className="col-sm-6 col-md-6">
-                <form role="search">
-                <div className="input-group full-width">
-                  <SearchInput className="search-input" onChange={ this.searchUpdated } />
-                </div>
-                </form>
-            </div>
-            <ul className="nav navbar-nav navbar-right">
-              <li><a href="javascript:void(0);" onClick={this.onNewTapped}>Add New</a></li>
-              <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown">{this.props.user.username} <b className="caret"></b></a>
-                <ul className="dropdown-menu">
-                  <li><a href="javascript:void(0);" onClick={this.logOut}>Logout</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </nav>
-          <ul>
-            <div hidden={!this.props.user.new_bookmark} >
-              <Form
-                {...this.props}
-                editable={true}
-                newbookmark={true}
-                id="new"
-               />
-              </div>
-            {this.renderBookmarks()}
-          </ul>
+          {this.renderBookmarks()}
         </div>
       </div>
     );
   }
 }
+
+
+/*
+Redux Containers - To map the components to store
+*/
 
 function mapStateToProps(state){
   return {bookmark: state.bookmark, user: state.user};

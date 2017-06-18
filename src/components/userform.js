@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class UserForm extends Component {
-  constructor(props){
-    super(props);
-  }
-
   authenticate_user(){
     var user_name = document.getElementById('username').value;
     var password = document.getElementById('password').value;
@@ -19,8 +15,7 @@ class UserForm extends Component {
   }
 
   render() {
-    var documentElementId = this.props.register? "r" : ""
-    return (
+   return (
     <div>
       <div className="container">
       </div>
@@ -28,11 +23,11 @@ class UserForm extends Component {
       <br />
       <div className="container">
       <div className="row">
-        <div className="col-sm-5 col-sm-offset-4">
+        <div className="col-sm-5 col-sm-offset-3">
         <div className="form-body">
           <ul className="nav nav-tabs final-login">
               <li className="active"><a data-toggle="tab" href="#sectionA">Sign In</a></li>
-              <li><a data-toggle="tab" href="#sectionB">Join us!</a></li>
+              <li><a data-toggle="tab" href="#sectionB">Register</a></li>
           </ul>
       	   <div className="tab-content">
               <div id="sectionA" className="tab-pane fade in active">
