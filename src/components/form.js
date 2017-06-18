@@ -69,7 +69,7 @@ class Form extends Component {
               &nbsp;&nbsp;&nbsp;
             </td>
             <td>
-              <input id={id+"url"} name="labels" type="text" defaultValue={url}  />
+              <input id={id+"url"} name="labels" type="text" defaultValue={url} size="50"  />
             </td>
           </tr>
           <tr>

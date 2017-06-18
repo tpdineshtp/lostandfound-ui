@@ -52,17 +52,7 @@ class Bookmark extends Component {
     return (
       <div>
         <div hidden={this.props.user._id}>
-          Login :
-          <UserForm
-            {...this.props}
-            register={false}
-          />
-
-          Register :
-          <UserForm
-            {...this.props}
-            register={true}
-          />
+          <UserForm  {...this.props}/>
         </div>
         <div hidden={!this.props.user._id}>
           <SearchInput className="search-input" onChange={ this.searchUpdated } />
