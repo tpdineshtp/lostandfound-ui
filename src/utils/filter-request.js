@@ -2,8 +2,8 @@ import { filterSuccess } from '../actions/bookmark';
 import store from '../store'
 
 const FilterApiCall = {
- filterBookmark(search) {
-   fetch('http://localhost:3000/bookmarks/tags/'+ search, {
+ filterBookmark(search, userId) {
+   fetch('http://localhost:3000/users/'+userId+'/bookmarks/tags/'+ search, {
      method: 'get',
    })
    .then(response => {

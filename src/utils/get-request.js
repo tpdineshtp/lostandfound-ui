@@ -2,8 +2,8 @@ import { successResponse } from '../actions/bookmark';
 import store from '../store'
 
 const ReadApiCall = {
- getBookmarks() {
-   makeApiCall('http://localhost:3000/bookmarks')
+ getBookmarks(userId) {
+   makeApiCall('http://localhost:3000/users/'+userId+'/bookmarks')
  },
 
  getBookmark(bookmarkId) {

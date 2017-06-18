@@ -1,4 +1,5 @@
-import { ADD_USER, ADD_USER_SUCCESS, ADD_NEW_BOOKMARK, AUTH_USER, AUTH_USER_SUCCESS, REMOVE_NEW_BOOKMARK } from '../constants';
+import { ADD_USER, ADD_USER_SUCCESS, ADD_NEW_BOOKMARK, LOG_OUT,
+        AUTH_USER, AUTH_USER_SUCCESS, REMOVE_NEW_BOOKMARK } from '../constants';
 
 import update from 'react-addons-update';
 import CreateApiCall from '../utils/add-request';
@@ -9,6 +10,8 @@ import FilterApiCall from '../utils/filter-request'
 
 export default function(state = [], action) {
   switch (action.type) {
+    case LOG_OUT:
+      return {}
     case ADD_USER:
       CreateApiCall.newUser(action.payload);
       // this.props.action.getAllBookmarks(action.payload._id);

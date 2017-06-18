@@ -1,4 +1,5 @@
-import { ADD_USER , ADD_USER_SUCCESS, ADD_NEW_BOOKMARK, AUTH_USER, AUTH_USER_SUCCESS, REMOVE_NEW_BOOKMARK } from '../constants';
+import { ADD_USER , ADD_USER_SUCCESS, ADD_NEW_BOOKMARK, LOG_OUT,
+        AUTH_USER, AUTH_USER_SUCCESS, REMOVE_NEW_BOOKMARK } from '../constants';
 
 
 export function addUser(user) {
@@ -24,4 +25,8 @@ export function authUser(user) {
 
 export function authUserSuccess(user) {
   return {payload: user, type: AUTH_USER_SUCCESS};
+}
+
+export function logOut(){
+  return {type: LOG_OUT}
 }

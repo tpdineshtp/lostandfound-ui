@@ -12,28 +12,23 @@ import { ListView, ListViewItem } from 'react-scrollable-list-view';
 class Bookmark extends Component {
   constructor(props) {
     super(props)
-    this.onTapped = this.onTapped.bind(this);
-    this.get_bookmarks = this.get_bookmarks.bind(this);
+    this.onNewTapped = this.onNewTapped.bind(this);
     this.renderBookmarks = this.renderBookmarks.bind(this);
     this.searchUpdated = this.searchUpdated.bind(this);
-    this.get_bookmarks()
+    this.logOut = this.logOut.bind(this)
   }
 
-  onTapped() {
-    // this.props.action.addBookmark({"name": "Default Name","url" :"www.example.com","tags": ["web", "entertainment"]})
+  onNewTapped() {
     this.props.useraction.addNewBookmark();
   }
-
-
-  get_bookmarks() {
-    this.props.action.getAllBookmarks();
+  logOut(){
+    this.props.useraction.logOut();
   }
-
   searchUpdated (term) {
     if(term === null || term.match(/^ *$/) !== null){
       term = '*'
     }
-    this.props.action.filterBookmark(term);
+    this.props.action.filterBookmark(term, this.props.user._id);
   }
 
   renderBookmarks() {
@@ -71,7 +66,8 @@ class Bookmark extends Component {
         </div>
         <div hidden={!this.props.user._id}>
           <SearchInput className="search-input" onChange={ this.searchUpdated } />
-          <button onClick={this.onTapped}>Add New</button>
+          <button onClick={this.onNewTapped}>Add New</button>
+          <button onClick={this.logOut}> Logout </button>
           <ul>
             <div hidden={!this.props.user.new_bookmark} >
               <Form

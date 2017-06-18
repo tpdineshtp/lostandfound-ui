@@ -1,12 +1,12 @@
-import { addSuccess } from '../actions/bookmark';
+import { addSuccess, getAllBookmarks } from '../actions/bookmark';
 import { addUserSuccess, authUserSuccess, removeNewBookmark } from '../actions/user';
 import store from '../store'
 
 const CreateApiCall = {
 
- newBookmark(bookmark) {
+ newBookmark(bookmark, userId) {
 
-   fetch('http://localhost:3000/bookmarks', {
+   fetch('http://localhost:3000/users/'+userId+'/bookmarks', {
      method: 'post',
      headers: {
        'Content-Type': 'application/json',
@@ -44,8 +44,8 @@ const CreateApiCall = {
        response.json().then(data => {
          console.log(data)
          if(!data.errors){
+           store.dispatch(getAllBookmarks(data._id));
            store.dispatch(addUserSuccess(data));
-           store.dispatch(removeNewBookmark());
         }
        });
      } else {
@@ -71,6 +71,7 @@ const CreateApiCall = {
        response.json().then(data => {
          console.log(data)
          if(!data.errors){
+           store.dispatch(getAllBookmarks(data._id));
            store.dispatch(authUserSuccess(data));
         }
        });

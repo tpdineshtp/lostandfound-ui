@@ -14,4 +14,5 @@ export const SUCCESS = 'success',
              ADD_NEW_BOOKMARK = 'add_new_bookmark',
              REMOVE_NEW_BOOKMARK= 'remove_new_bookmark',
              AUTH_USER = 'auth_user',
-             AUTH_USER_SUCCESS = 'auth_user_success'
+             AUTH_USER_SUCCESS = 'auth_user_success',
+             LOG_OUT = 'log_out'

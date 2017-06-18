@@ -13,7 +13,8 @@ class Form extends Component {
     var request = this.request_body(name,url,tags);
     if(this.props.newbookmark === true) {
       console.log(name)
-      this.props.action.addBookmark(request)
+      request.userId = this.props.user._id;
+      this.props.action.addBookmark(request, this.props.user._id)
       this.props.useraction.removeNewBookmark();
     }
     else {

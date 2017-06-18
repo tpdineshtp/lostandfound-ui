@@ -1,5 +1,5 @@
 import { ADD_BOOKMARK, ADD_SUCCESS, SUCCESS, GET_ALL_BOOKMARKS,
-        DELETE_BOOKMARK, UPDATE_BOOKMARK, UPDATE_SUCCESS,
+        DELETE_BOOKMARK, UPDATE_BOOKMARK, UPDATE_SUCCESS, LOG_OUT,
         FLIP_EDITABLE ,DELETE_SUCCESS, FILTER_BOOKMARK, FILTER_SUCCESS} from '../constants';
 
 import update from 'react-addons-update';
@@ -11,8 +11,10 @@ import FilterApiCall from '../utils/filter-request'
 
 export default function(state = [], action) {
   switch (action.type) {
+    case LOG_OUT:
+      return [];
     case ADD_BOOKMARK:
-      CreateApiCall.newBookmark(action.payload);
+      CreateApiCall.newBookmark(action.payload, action.userId);
       return state;
     case FILTER_SUCCESS:
       action.payload.map((bookmark) => {
@@ -34,7 +36,7 @@ export default function(state = [], action) {
       }
       return [...state,action.payload]
     case GET_ALL_BOOKMARKS:
-      ReadApiCall.getBookmarks();
+      ReadApiCall.getBookmarks(action.payload);
       return state;
 
     case UPDATE_SUCCESS:
@@ -62,7 +64,7 @@ export default function(state = [], action) {
       return state;
 
     case FILTER_BOOKMARK:
-      FilterApiCall.filterBookmark(action.payload);
+      FilterApiCall.filterBookmark(action.payload, action.userId);
       return state;
     case FLIP_EDITABLE:
       const newState = [...state];

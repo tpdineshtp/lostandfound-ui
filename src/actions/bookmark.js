@@ -10,12 +10,12 @@ export function addSuccess(response) {
   return { payload: response, type: ADD_SUCCESS };
 }
 
-export function addBookmark(bookmark) {
-  return { payload: bookmark, type: ADD_BOOKMARK }
+export function addBookmark(bookmark, userId) {
+  return { payload: bookmark, userId: userId, type: ADD_BOOKMARK }
 }
 
-export function getAllBookmarks() {
-  return { type: GET_ALL_BOOKMARKS }
+export function getAllBookmarks( user_id ) {
+  return { payload: user_id, type: GET_ALL_BOOKMARKS }
 }
 
 export function deleteBookmark(bookmarkId){
@@ -34,8 +34,8 @@ export function updateSuccess(bookmark){
   return { payload: bookmark, type: UPDATE_SUCCESS}
 }
 
-export function filterBookmark(search_text){
-  return {payload: search_text, type: FILTER_BOOKMARK}
+export function filterBookmark(search_text, user_id){
+  return {payload: search_text, userId:user_id,  type: FILTER_BOOKMARK}
 }
 
 export function filterSuccess(bookmark){
