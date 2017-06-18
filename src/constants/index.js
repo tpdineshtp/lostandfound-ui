@@ -8,4 +8,5 @@ export const SUCCESS = 'success',
              FLIP_EDITABLE = 'flip_editable',
              ADD_SUCCESS = 'add_succes',
              FILTER_BOOKMARK = 'filter_bookmark',
-             FILTER_SUCCESS = 'filter_success'
+             FILTER_SUCCESS = 'filter_success',
+             ADD_USER = 'add_user'

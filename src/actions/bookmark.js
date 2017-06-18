@@ -1,6 +1,6 @@
 import { SUCCESS, ADD_SUCCESS, ADD_BOOKMARK, GET_ALL_BOOKMARKS,
         DELETE_BOOKMARK, DELETE_SUCCESS, UPDATE_SUCCESS,
-        UPDATE_BOOKMARK ,FLIP_EDITABLE, FILTER_BOOKMARK, FILTER_SUCCESS} from '../constants/AddBookmarkActionTypes';
+        UPDATE_BOOKMARK ,FLIP_EDITABLE, FILTER_BOOKMARK, FILTER_SUCCESS} from '../constants';
 
 export function successResponse(response) {
   return { payload: response, type: SUCCESS };
@@ -10,8 +10,7 @@ export function addSuccess(response) {
   return { payload: response, type: ADD_SUCCESS };
 }
 
-export function addBookmark(name, url, tags) {
-  const bookmark = {name, url, tags};
+export function addBookmark(bookmark) {
   return { payload: bookmark, type: ADD_BOOKMARK }
 }
 
@@ -27,8 +26,8 @@ export function deleteSuccessResponse(bookmarkId){
   return { payload: bookmarkId, type: DELETE_SUCCESS  }
 }
 
-export function updateBookmark(bookmark){
-  return { payload: bookmark, type: UPDATE_BOOKMARK}
+export function updateBookmark(bookmark, bookmarkId){
+  return { payload: bookmark, id: bookmarkId, type: UPDATE_BOOKMARK}
 }
 
 export function updateSuccess(bookmark){

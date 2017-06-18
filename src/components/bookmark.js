@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import * as bookmark from '../actions/bookmark';
 import SearchInput from 'react-search-input'
 import Grid from './grid';
+import Form from './form'
+import { ListView, ListViewItem } from 'react-scrollable-list-view';
 
 class Bookmark extends Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class Bookmark extends Component {
   }
 
   onTapped() {
-    this.props.action.addBookmark("Default Name", "www.example.com", ["web", "entertainment"])
+    this.props.action.addBookmark({"name": "Default Name","url" :"www.example.com","tags": ["web", "entertainment"]})
   }
 
 
@@ -51,9 +53,15 @@ class Bookmark extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.onTapped}>Add New</button>
         <SearchInput className="search-input" onChange={ this.searchUpdated } />
+        <button onClick={this.onTapped}>Add New</button>
         <ul>
+            <Form
+              {...this.props}
+              editable={true}
+              newbookmark={true}
+              id="new"
+             />
           {this.renderBookmarks()}
         </ul>
       </div>

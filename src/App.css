@@ -56,3 +56,61 @@
 .search-input > input:focus {
   outline: none;
 }
+body {
+    background: var(--md-background-color);
+    cursor: default;
+}
+
+.website-title {
+    color: var(--primary-text-color);
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#domain {
+    -webkit-margin-start: 16px;
+    color: var(--secondary-text-color);
+    flex-shrink: 0;
+}
+
+.subtitle {
+    color: var(--primary-text-color);
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#title-and-domain {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    height: var(--item-height);
+    overflow: hidden;
+}
+
+#background {
+    box-shadow: var(--shadow-elevation-2dp_-_box-shadow);
+    background: #fff;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#background-clip {
+    bottom: -0.4px;
+    clip: rect(auto 999px auto -5px);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
+#main-container {
+   position: relative;
+}

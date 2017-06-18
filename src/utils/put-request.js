@@ -2,21 +2,21 @@ import { updateSuccess } from '../actions/bookmark';
 import store from '../store'
 
 const UpdateApiCall = {
- upadateBookmark(bookmark) {
-   var request_body = bookmark;
-   var request_path = 'http://localhost:3000/bookmarks/' +bookmark._id
-   delete  request_body['_id'];
+ upadateBookmark(bookmark, id) {
+   var request_path = 'http://localhost:3000/bookmarks/' +id
    fetch(request_path, {
      method: 'put',
      headers: {
        'Content-Type': 'application/json',
      },
-     body: JSON.stringify(request_body),
+     body: JSON.stringify(bookmark),
    })
    .then(response => {
      if (response.status >= 200 && response.status < 300) {
        response.json().then(data => {
-         store.dispatch(updateSuccess(data));
+         if(!data.errors){
+          store.dispatch(updateSuccess(data));
+        }
        });
      } else {
        const error = new Error(response.statusText);

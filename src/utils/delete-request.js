@@ -9,7 +9,9 @@ const DeleteApiCall = {
    .then(response => {
      if (response.status >= 200 && response.status < 300) {
        response.json().then(data => {
-         store.dispatch(deleteSuccessResponse(bookmark));
+         if(!data.errors){
+           store.dispatch(deleteSuccessResponse(bookmark));
+        }
        });
      } else {
        const error = new Error(response.statusText);

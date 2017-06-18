@@ -1,6 +1,7 @@
 import { ADD_BOOKMARK, ADD_SUCCESS, SUCCESS, GET_ALL_BOOKMARKS,
         DELETE_BOOKMARK, UPDATE_BOOKMARK, UPDATE_SUCCESS,
-        FLIP_EDITABLE ,DELETE_SUCCESS, FILTER_BOOKMARK, FILTER_SUCCESS} from '../constants/AddBookmarkActionTypes';
+        FLIP_EDITABLE ,DELETE_SUCCESS, FILTER_BOOKMARK, FILTER_SUCCESS} from '../constants';
+
 import update from 'react-addons-update';
 import CreateApiCall from '../utils/add-request';
 import ReadApiCall from '../utils/get-request';
@@ -17,9 +18,9 @@ export default function(state = [], action) {
       action.payload.map((bookmark) => {
         bookmark.editable = false;
       })
-    return action.payload
+      return action.payload
     case ADD_SUCCESS:
-      action.payload.editable = true;
+      console.log("New Bookmark Added")
       return [...state, action.payload];
     case SUCCESS:
       console.log(action.payload)
@@ -57,7 +58,7 @@ export default function(state = [], action) {
       DeleteApiCall.deleteBookmark(action.payload)
       return state;
     case UPDATE_BOOKMARK:
-      UpdateApiCall.upadateBookmark(action.payload)
+      UpdateApiCall.upadateBookmark(action.payload, action.id)
       return state;
 
     case FILTER_BOOKMARK:

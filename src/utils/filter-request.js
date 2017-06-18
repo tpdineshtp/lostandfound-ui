@@ -9,7 +9,9 @@ const FilterApiCall = {
    .then(response => {
      if (response.status >= 200 && response.status < 300) {
        response.json().then(data => {
-         store.dispatch(filterSuccess(data));
+         if(!data.errors){
+          store.dispatch(filterSuccess(data));
+        }
        });
      } else {
        const error = new Error(response.statusText);
