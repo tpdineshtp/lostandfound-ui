@@ -27,6 +27,9 @@ class Form extends Component {
         else{
           if(this.props.newbookmark === true) {
             request.userId = this.props.user._id;
+            document.getElementById('newtags').value = "";
+            document.getElementById('newname').value = "";
+            document.getElementById('newurl').value = "";
             this.props.action.addBookmark(request, this.props.user._id)
             this.props.useraction.removeNewBookmark();
           }
@@ -47,6 +50,12 @@ class Form extends Component {
   }
   flip(bookmark){
     if(this.props.newbookmark === true) {
+      document.getElementById('newtags').value = "";
+      document.getElementById('newname').value = "";
+      document.getElementById('newurl').value = "";
+      document.getElementById('newtags').value = "";
+      document.getElementById('newname').value = "";
+      document.getElementById('newurl').value = "";
       this.props.useraction.removeNewBookmark();
     }
     else{
@@ -57,7 +66,7 @@ class Form extends Component {
   render() {
     var { id, name, tags, url, editable } = this.props
     return (
-    <div hidden={!editable} id="edit" className="col-sm-8" >
+    <div hidden={!editable} id="edit" className="col-sm-10 col-sm-offset-1" >
       <div data-toggle="validator" role="form">
         <div className="form-group">
           <label className="control-label">Name</label>

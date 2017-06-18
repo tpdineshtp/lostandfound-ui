@@ -20,51 +20,28 @@ class Grid extends Component {
     var { id, name, tags, url, editable } = this.props;
     return (
       <div id="main-container">
-        <div id="background-clip">
-          <div id="background"></div>
-        </div>
-        <div hidden={editable} id="item-container">
-          <span  id="view" >
-            <table width="100%">
-              <tbody>
-                <tr>
-                  <td>
-                    <span>
-                      <a onClick={() => this.flip(id)}></a>
-                    </span>
-                  </td>
-                  <td width="100%" >
-                    <span >
-                      <a>{name}</a>
-                    </span>
-                    <span>
-                    </span>
-                    <span >
-                      &nbsp;-&nbsp;
-                    </span>
-                    <span >
-                      {url}
-                    </span>
-                    <span >
-                      &nbsp;-&nbsp;
-                    </span>
-                    <span >
-                      {tags.map((tag,idx) => {
-                        return (<span key={idx}><a href="javascript:void(0);" >{tag} </a></span>);
-                      })}
-                    </span>
-                    <span>
-                      &nbsp;-&nbsp;
-                      <a href="javascript:void(0);" onClick={() => this.flip(id)}>
-                        Edit
-                      </a>
-                      &nbsp;&nbsp;
-                      <a href="javascript:void(0);" onClick={() => this.deleteBookmark(id)}>Remove</a>
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <div  id="item-container">
+          <span hidden={editable} id="view" >
+            <div className="table-container col-sm-10 col-md-10 col-sm-offset-1 col-md-offet-1">
+              <table className="table table-filter">
+                <tbody>
+                  <tr onClick={() => this.flip(id)}>
+                    <td>
+                      <div className="media">
+                        <div className="media-body">
+                          <span className="media-meta pull-right">{url}</span>
+                          <h4 className="title">
+                            {name}
+                          </h4>
+                          <p className="summary">{tags}</p>
+                          <a className="media-star delete pull-right" href="javascript:void(0);" onClick={() => this.deleteBookmark(id)}>Remove</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </span>
         </div>
 
