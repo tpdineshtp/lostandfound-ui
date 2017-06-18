@@ -55,9 +55,38 @@ class Bookmark extends Component {
           <UserForm  {...this.props}/>
         </div>
         <div hidden={!this.props.user._id}>
-          <SearchInput className="search-input" onChange={ this.searchUpdated } />
-          <button onClick={this.onNewTapped}>Add New</button>
-          <button onClick={this.logOut}> Logout </button>
+
+        <nav className="navbar navbar-default" role="navigation">
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href="#">Bookmark Manager</a>
+          </div>
+
+          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <div className="col-sm-6 col-md-6">
+                <form role="search">
+                <div className="input-group full-width">
+                  <SearchInput className="search-input" onChange={ this.searchUpdated } />
+                </div>
+                </form>
+            </div>
+            <ul className="nav navbar-nav navbar-right">
+              <li><a href="javascript:void(0);" onClick={this.onNewTapped}>Add New</a></li>
+              <li className="dropdown">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown">{this.props.user.username} <b className="caret"></b></a>
+                <ul className="dropdown-menu">
+                  <li><a href="javascript:void(0);" onClick={this.logOut}>Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
           <ul>
             <div hidden={!this.props.user.new_bookmark} >
               <Form
