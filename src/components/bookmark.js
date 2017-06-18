@@ -31,7 +31,7 @@ class Bookmark extends Component {
 
   searchUpdated (term) {
     if(term === null || term.match(/^ *$/) !== null){
-      term = 'a'
+      term = '*'
     }
     this.props.action.filterBookmark(term);
   }
