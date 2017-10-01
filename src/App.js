@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Bookmark from './components/bookmark'
+import WelcomePage from './components/welcome-page'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Bookmark />
+        <WelcomePage />
       </div>
     );
   }
